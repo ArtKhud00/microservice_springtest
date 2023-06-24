@@ -36,8 +36,8 @@ services:
     command: -p 5732
     restart: always
 
-  postgres-product:
-    container_name: postgres-product
+  postgres-product1:
+    container_name: postgres-product1
     image: postgres
     environment:
       POSTGRES_DB: storehousedb
@@ -45,12 +45,12 @@ services:
       POSTGRES_PASSWORD: password
       PGDATA: /data/postgres
     volumes:
-      - ./postgres-inventory:/data/postgres
+      - ./postgres-product:/data/postgres
     expose:
-      - "5733"
+      - "5734"
     ports:
-      - "5733:5733"
-    command: -p 5733
+      - "5734:5734"
+    command: -p 5734
     restart: always
 
   ## Eureka Server
@@ -81,9 +81,9 @@ services:
     image: artkhud20/product1-service:1.0.0
     environment:
       - SPRING_PROFILES_ACTIVE=docker
-#      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-product:5733/storehousedb
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://postgres-product1:5734/storehousedb
     depends_on:
-      - postgres-product
+      - postgres-product1
       - discovery-server
       - api-gateway
 
