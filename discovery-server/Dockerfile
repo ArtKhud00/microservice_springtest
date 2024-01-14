@@ -1,11 +1,7 @@
-# Используйте базовый образ Eclipse Temurin 17
-FROM eclipse-temurin:17-jdk
+FROM openjdk:17
 
-# Установите рабочую директорию в контейнере
 WORKDIR /app
 
-# Скопируйте JAR-файл сервиса в контейнер
-COPY target/*.jar app.jar
+COPY target/*.jar appl.jar
 
-# Укажите команду для запуска сервиса в контейнере
-CMD ["java", "-jar", "app.jar"]
+ENTRYPOINT ["java","-jar","appl.jar"]
