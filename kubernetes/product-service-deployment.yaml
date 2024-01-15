@@ -16,11 +16,11 @@ spec:
         app: product-service
     spec:
       containers:
-        - name: product1-service
-          image: artkhud20/product1-service:1.0.0
+        - name: product-service
+          image: artkhud20/product-service:2.0.0
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-product1:5734/storehousedb
+              value: jdbc:postgresql://postgres-product:5734/storehousedb
             - name: SPRING_PROFILES_ACTIVE
               value: docker
 
@@ -40,7 +40,7 @@ spec:
   ports:
     - name: "80"
       port: 80
-      targetPort: 9194
+      targetPort: 8080
   selector:
     app: product-service
 status:

@@ -17,8 +17,10 @@ spec:
     spec:
       containers:
         - name: api-gateway
-          image: artkhud20/api-gateway:1.0.0
+          image: artkhud20/api-gateway:2.0.0
           env:
+            - name: LOGGING_LEVEL_ORG_SPRINGFRAMEWORK_SECURITY
+              value: ' TRACE'
             - name: SPRING_PROFILES_ACTIVE
               value: docker
           ports:
@@ -40,7 +42,6 @@ spec:
     - name: "8181"
       port: 8181
       targetPort: 8080
-#      targetPort: 8181
   selector:
     app: api-gateway
 status:

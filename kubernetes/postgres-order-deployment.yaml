@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: postgres-order
-          image: postgres
+          image: postgres:15
           args:
             - "-p"
             - "5731"
@@ -26,7 +26,7 @@ spec:
             - name: PGDATA
               value: /data/postgres
             - name: POSTGRES_DB
-              value: storehousedb
+              value: order-service
             - name: POSTGRES_PASSWORD
               value: password
             - name: POSTGRES_USER

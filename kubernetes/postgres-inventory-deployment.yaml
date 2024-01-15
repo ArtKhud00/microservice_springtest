@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: postgres-inventory
-          image: postgres
+          image: postgres:15
           args:
               - "-p"
               - "5732"
@@ -24,7 +24,7 @@ spec:
             - name: PGDATA
               value: /data/postgres
             - name: POSTGRES_DB
-              value: storehousedb
+              value: inventory-service
             - name: POSTGRES_PASSWORD
               value: password
             - name: POSTGRES_USER

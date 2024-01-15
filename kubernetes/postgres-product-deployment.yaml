@@ -2,21 +2,21 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app: postgres-product1
-  name: postgres-product1
+    app: postgres-product
+  name: postgres-product
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: postgres-product1
+      app: postgres-product
   template:
     metadata:
       labels:
-        app: postgres-product1
+        app: postgres-product
     spec:
       containers:
-        - name: postgres-product1
-          image: postgres
+        - name: postgres-product
+          image: postgres:15
           args:
             - "-p"
             - "5734"
@@ -45,15 +45,15 @@ apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: postgres-product1
-  name: postgres-product1
+    app: postgres-product
+  name: postgres-product
 spec:
   ports:
     - name: "5734"
       port: 5734
       targetPort: 5734
   selector:
-    app: postgres-product1
+    app: postgres-product
 status:
   loadBalancer: {}
 ---

@@ -18,10 +18,10 @@ spec:
     spec:
       containers:
         - name: order-service
-          image: artkhud20/order-service:1.0.0
+          image: artkhud20/order-service:2.0.1
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-order:5731/storehousedb
+              value: jdbc:postgresql://postgres-order:5731/order-service
             - name: SPRING_PROFILES_ACTIVE
               value: docker
             - name: eureka.instance.preferIpAddress
@@ -39,7 +39,7 @@ spec:
   ports:
     - name: "80"
       port: 80
-      targetPort: 9193
+      targetPort: 8080
   selector:
     app: order-service
 status:

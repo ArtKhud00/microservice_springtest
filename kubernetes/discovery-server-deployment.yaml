@@ -18,7 +18,7 @@ spec:
     spec:
       containers:
         - name: discovery-server
-          image: artkhud20/discovery-server:1.0.0
+          image: artkhud20/discovery-server:2.0.0
           env:
             - name: SPRING_PROFILES_ACTIVE
               value: docker

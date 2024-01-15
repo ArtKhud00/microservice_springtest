@@ -18,10 +18,10 @@ spec:
     spec:
       containers:
         - name: inventory-service
-          image: artkhud20/inventory-service:1.0.0
+          image: artkhud20/inventory-service:2.0.1
           env:
             - name: SPRING_DATASOURCE_URL
-              value: jdbc:postgresql://postgres-inventory:5732/storehousedb
+              value: jdbc:postgresql://postgres-inventory:5732/inventory-service
             - name: SPRING_PROFILES_ACTIVE
               value: docker
 
@@ -40,7 +40,7 @@ spec:
   ports:
     - name: "80"
       port: 80
-      targetPort: 9191
+      targetPort: 8080
   selector:
     app: inventory-service
 status:
