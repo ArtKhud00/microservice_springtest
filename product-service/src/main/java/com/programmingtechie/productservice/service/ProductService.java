@@ -6,9 +6,12 @@ import com.programmingtechie.productservice.model.Product;
 import com.programmingtechie.productservice.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.bytebuddy.implementation.bytecode.Throw;
+import org.springframework.data.crossstore.ChangeSetPersister;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @Service
 @RequiredArgsConstructor
@@ -17,7 +20,7 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public void createProduct(ProductRequest productRequest) {
+    public ProductResponse createProduct(ProductRequest productRequest) {
         Product product = Product.builder()
                 .name(productRequest.getName())
                 .description(productRequest.getDescription())
@@ -26,6 +29,7 @@ public class ProductService {
 
         productRepository.save(product);
         log.info("Product {} is saved", product.getId());
+        return mapToProductResponse(product);
     }
 
     public List<ProductResponse> getAllProducts() {
@@ -33,6 +37,23 @@ public class ProductService {
 
         return products.stream().map(this::mapToProductResponse).toList();
     }
+
+    public ProductResponse updateProduct(Long id, ProductRequest productRequest) {
+        Product product = productRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Product not found"));
+        product.setDescription(productRequest.getDescription());
+        product.setPrice(productRequest.getPrice());
+        product.setName(productRequest.getName());
+        productRepository.save(product);
+        log.info("Product {} is updated", product.getId());
+        return mapToProductResponse(product);
+    }
+
+    public void deleteProduct(Long id) {
+        Product product = productRepository.findById(id).orElseThrow(()-> new NoSuchElementException("Product not found"));
+        productRepository.delete(product);
+        log.info("Product {} is deleted", id);
+    }
+
 
     private ProductResponse mapToProductResponse(Product product) {
         return ProductResponse.builder()
