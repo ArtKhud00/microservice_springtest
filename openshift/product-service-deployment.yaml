@@ -21,7 +21,6 @@ spec:
           env:
             - name: SPRING_DATASOURCE_URL
               value: jdbc:postgresql://postgres-product:5734/storehousedb
-              # value: jdbc:postgresql://postgres-inventory:5732/storehousedb
             - name: SPRING_PROFILES_ACTIVE
               value: docker
 
